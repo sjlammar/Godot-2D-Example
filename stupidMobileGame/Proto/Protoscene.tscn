@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Proto/MC.gd" type="Script" id=1]
+[ext_resource path="res://Proto/MC.png" type="Texture" id=2]
+[ext_resource path="res://Proto/solidBlock.png" type="Texture" id=3]
+[ext_resource path="res://Proto/debugger.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Proto/Protoscene.gd" type="Script" id=5]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "solidBlock.png 0"
+0/texture = ExtResource( 3 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 16, 16 )
+
+[node name="Protoscene" type="Node2D"]
+script = ExtResource( 5 )
+
+[node name="debugger" parent="." instance=ExtResource( 4 )]
+
+[node name="Solid" type="TileMap" parent="."]
+tile_set = SubResource( 2 )
+cell_size = Vector2( 32, 32 )
+cell_custom_transform = Transform2D( 32, 0, 0, 32, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0 )
+
+[node name="MC" type="KinematicBody2D" parent="."]
+position = Vector2( 40, 24 )
+collision_layer = 2
+collision_mask = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="MC"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MC"]
+shape = SubResource( 3 )
